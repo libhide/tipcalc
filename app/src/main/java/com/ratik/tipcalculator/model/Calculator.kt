@@ -2,7 +2,7 @@ package com.ratik.tipcalculator.model
 
 import java.math.RoundingMode
 
-class RestaurantCalculator {
+class Calculator {
 
     fun calculateTip(checkAmount: Double, tipPct: Int): TipCalculation {
         val tipAmount = (checkAmount * (tipPct.toDouble() / 100.0))
