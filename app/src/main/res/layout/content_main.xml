@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="vm"
             type="com.ratik.tipcalculator.viewmodel.CalculatorViewModel" />
@@ -83,7 +84,7 @@
                     style="@style/TextAppearance.AppCompat.Large"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="₹750.00"
+                    android:text="@{vm.outputCheckAmount}"
                     android:textAlignment="center"
                     tools:text="₹750.00" />
 
@@ -106,7 +107,7 @@
                     style="@style/TextAppearance.AppCompat.Large"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="₹150.00"
+                    android:text="@{vm.outputTipAmount}"
                     android:textAlignment="center"
                     tools:text="₹150.00" />
 
@@ -129,7 +130,7 @@
                     style="@style/TextAppearance.AppCompat.Large"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="₹900.00"
+                    android:text="@{vm.outputGrandTotal}"
                     android:textAlignment="center"
                     tools:text="₹900.00" />
 
