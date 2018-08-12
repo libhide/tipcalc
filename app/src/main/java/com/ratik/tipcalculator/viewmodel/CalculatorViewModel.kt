@@ -1,12 +1,13 @@
 package com.ratik.tipcalculator.viewmodel
 
 import android.app.Application
-import android.databinding.BaseObservable
 import com.ratik.tipcalculator.R
 import com.ratik.tipcalculator.model.Calculator
 import com.ratik.tipcalculator.model.TipCalculation
 
-class CalculatorViewModel(val app: Application, val calculator: Calculator = Calculator()): BaseObservable() {
+class CalculatorViewModel @JvmOverloads constructor(
+        app: Application, val calculator: Calculator = Calculator()) : ObservableViewModel(app) {
+
     var inputCheckAmount = ""
     var inputTipPercentage = ""
 
@@ -19,9 +20,9 @@ class CalculatorViewModel(val app: Application, val calculator: Calculator = Cal
     }
 
     private fun updateOutputs(tc: TipCalculation) {
-        outputCheckAmount = app.getString(R.string.rupee_amount, tc.checkAmount)
-        outputTipAmount = app.getString(R.string.rupee_amount, tc.tipAmount)
-        outputGrandTotal = app.getString(R.string.rupee_amount, tc.grandTotal)
+        outputCheckAmount = getApplication<Application>().getString(R.string.rupee_amount, tc.checkAmount)
+        outputTipAmount = getApplication<Application>().getString(R.string.rupee_amount, tc.tipAmount)
+        outputGrandTotal = getApplication<Application>().getString(R.string.rupee_amount, tc.grandTotal)
     }
 
     fun calculateTip() {
@@ -30,13 +31,7 @@ class CalculatorViewModel(val app: Application, val calculator: Calculator = Cal
 
         if (checkAmount != null && tipPct != null) {
             updateOutputs(calculator.calculateTip(checkAmount, tipPct))
-            clearInputs()
+            notifyChange()
         }
-    }
-
-    private fun clearInputs() {
-        inputCheckAmount = "0.00"
-        inputTipPercentage = "0"
-        notifyChange()
     }
 }
