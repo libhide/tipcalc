@@ -7,4 +7,7 @@
     <string name="bill_amount_label">Check</string>
     <string name="grand_total_label">Total</string>
     <string name="rupee_amount">₹%1.02f</string>
+    <string name="save_hint">Enter Location</string>
+    <string name="action_save">Save</string>
+    <string name="action_cancel">Cancel</string>
 </resources>
