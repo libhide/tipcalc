@@ -11,11 +11,15 @@ import com.ratik.tipcalculator.R
 import com.ratik.tipcalculator.databinding.ActivityMainBinding
 import com.ratik.tipcalculator.viewmodel.CalculatorViewModel
 
-class MainActivity : AppCompatActivity(), SaveDialogFragment.Callback {
-
+class MainActivity : AppCompatActivity(), SaveDialogFragment.Callback, LoadDialogFragment.Callback {
     override fun onSaveTip(name: String) {
         binding.vm?.saveCurrentTip(name)
         Snackbar.make(binding.root, "Saved $name", Snackbar.LENGTH_SHORT).show()
+    }
+
+    override fun onTipSelected(name: String) {
+        binding.vm?.loadTipCalculation(name)
+        Snackbar.make(binding.root, "Loaded $name", Snackbar.LENGTH_SHORT).show()
     }
 
     lateinit var binding: ActivityMainBinding
@@ -39,6 +43,10 @@ class MainActivity : AppCompatActivity(), SaveDialogFragment.Callback {
                 showSaveDialog()
                 true
             }
+            R.id.action_load -> {
+                showLoadDialog()
+                true
+            }
             else -> super.onOptionsItemSelected(item)
         }
     }
@@ -46,5 +54,10 @@ class MainActivity : AppCompatActivity(), SaveDialogFragment.Callback {
     private fun showSaveDialog() {
         val saveFragment = SaveDialogFragment()
         saveFragment.show(supportFragmentManager, "Save Dialog")
+    }
+
+    private fun showLoadDialog() {
+        val loadFragment = LoadDialogFragment()
+        loadFragment.show(supportFragmentManager, "Load Dialog")
     }
 }

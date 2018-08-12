@@ -1,6 +1,8 @@
 package com.ratik.tipcalculator.viewmodel
 
 import android.app.Application
+import android.arch.lifecycle.LiveData
+import android.arch.lifecycle.Transformations
 import com.ratik.tipcalculator.R
 import com.ratik.tipcalculator.model.Calculator
 import com.ratik.tipcalculator.model.TipCalculation
@@ -47,5 +49,25 @@ class CalculatorViewModel @JvmOverloads constructor(
         val tipToSave = lastTipCalculate.copy(locationName = name)
         calculator.saveTipCalculation(tipToSave)
         updateOutputs(tipToSave)
+    }
+
+    fun loadSavedTipCalculationSummaries(): LiveData<List<TipCalculationSummaryItem>> {
+        return Transformations.map(calculator.loadSavedTipCalculations(), { tipCalculationObjects ->
+            tipCalculationObjects.map {
+                TipCalculationSummaryItem(it.locationName,
+                        getApplication<Application>().getString(R.string.rupee_amount, it.grandTotal))
+            }
+        })
+    }
+
+    fun loadTipCalculation(name: String) {
+        val tc = calculator.loadTipCalculationByName(name)
+        if (tc != null) {
+            inputCheckAmount = tc.checkAmount.toString()
+            inputTipPercentage = tc.tipPct.toString()
+
+            updateOutputs(tc)
+            notifyChange()
+        }
     }
 }
