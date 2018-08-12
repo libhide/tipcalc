@@ -17,8 +17,8 @@
         android:layout_margin="8dp"
         android:paddingBottom="26dp"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
-        tools:context=".view.MainActivity"
-        tools:showIn="@layout/activity_main">
+        tools:context=".view.TipCalculatorActivity"
+        tools:showIn="@layout/activity_tip_calculator">
 
         <android.support.design.widget.TextInputLayout
             android:id="@+id/input_layout_check_amount"

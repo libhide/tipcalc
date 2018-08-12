@@ -8,10 +8,10 @@ import android.support.v7.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
 import com.ratik.tipcalculator.R
-import com.ratik.tipcalculator.databinding.ActivityMainBinding
+import com.ratik.tipcalculator.databinding.ActivityTipCalculatorBinding
 import com.ratik.tipcalculator.viewmodel.CalculatorViewModel
 
-class MainActivity : AppCompatActivity(), SaveDialogFragment.Callback, LoadDialogFragment.Callback {
+class TipCalculatorActivity : AppCompatActivity(), SaveDialogFragment.Callback, LoadDialogFragment.Callback {
     override fun onSaveTip(name: String) {
         binding.vm?.saveCurrentTip(name)
         Snackbar.make(binding.root, "Saved $name", Snackbar.LENGTH_SHORT).show()
@@ -22,11 +22,11 @@ class MainActivity : AppCompatActivity(), SaveDialogFragment.Callback, LoadDialo
         Snackbar.make(binding.root, "Loaded $name", Snackbar.LENGTH_SHORT).show()
     }
 
-    lateinit var binding: ActivityMainBinding
+    lateinit var binding: ActivityTipCalculatorBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_tip_calculator)
         binding.vm = ViewModelProviders.of(this).get(CalculatorViewModel::class.java)
 
         setSupportActionBar(binding.toolbar)
